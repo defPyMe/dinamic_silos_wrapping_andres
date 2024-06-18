@@ -3,7 +3,7 @@
 
 from dataset import ex, dict_consumption_arrival
 #188 empty rest  - 132
-
+#in case we go in teh second iteration i need to sum ?? or should be a different i?
 
 
 
@@ -107,7 +107,15 @@ def processing_unloading(dict_input, week, dict_consumption_arrival, rest_needs,
     #i have an ordered list of values that represent my processed statuses [0, 1, 2], unloading, full, empty
     sorted_statuses = getting_ordered_list_un(dict_input, check)
     
+    
+    
+    
+
  
+
+
+
+
     #([0, 2, 3, 3], ['unloading', 'empty', 'loading', "loading"]) --> ex of what we could get
 
     #start unloading according to algorithm , if the first is unloading
@@ -123,6 +131,11 @@ def processing_unloading(dict_input, week, dict_consumption_arrival, rest_needs,
                 #changing key to processed loading
                 change_loading_unloading_status(dict_input, found_match_unloading[i][0],4, "processed_unloading")
                 change_loading_unloading_status(dict_input, found_match_unloading[i][0],1,found_match_unloading[i][1][1] - total_consumption )
+                #adding what awas unloaded
+
+
+              
+
 
                 #erasing the status  
                 total_consumption = 0 
@@ -132,16 +145,22 @@ def processing_unloading(dict_input, week, dict_consumption_arrival, rest_needs,
                 change_loading_unloading_status(dict_input, found_match_unloading[i][0],4, "processed_unloading")
                 #keeo status to loaded 
                 #erasing_total_arrival 
+
+
+
                 total_consumption = 0
                 #changing the status
                 change_loading_unloading_status(dict_input, found_match_unloading[i][0],0, "empty")
                 change_loading_unloading_status(dict_input, found_match_unloading[i][0],1, 0)
+
         #we cannot cover everything  with unloading, will look for other unloadings or 
             elif (found_match_unloading[i][1][1] - total_consumption) <0 and total_consumption > 0:
                 #changing key to processed loading
                 change_loading_unloading_status(dict_input, found_match_unloading[i][0],4, "processed_unloading")
                 #keeo s in in silos - need - x)=  -in silos + need
                 unloaded  =  found_match_unloading[i][1][1]
+
+   
                 #total consumption is now the rest so i shpuld decrease it
                 total_consumption -= unloaded
                 #erasing_total_arrival 
@@ -160,6 +179,8 @@ def processing_unloading(dict_input, week, dict_consumption_arrival, rest_needs,
                 change_loading_unloading_status(dict_input, found_match_full[i][0],0, "unloading")
                 #change the value to the max
                 change_loading_unloading_status(dict_input, found_match_full[i][0],1,  found_match_full[i][1][2] - total_consumption)
+                print("toatlllll consumptionnnnn ------> ", total_consumption)
+              
                 #resetting rest needs
                 total_consumption = 0
                 #resetting the counter as it is now unloading
@@ -167,6 +188,8 @@ def processing_unloading(dict_input, week, dict_consumption_arrival, rest_needs,
             elif total_consumption == found_match_full[i][1][2]:
                 change_loading_unloading_status(dict_input, found_match_full[i][0],4, "processed_unloading")
                 #changing the status to full 
+               
+
                 change_loading_unloading_status(dict_input, found_match_full[i][0],0, "empty")
                 #change the value to the max
                 change_loading_unloading_status(dict_input, found_match_full[i][0],1, 0)    
@@ -180,6 +203,8 @@ def processing_unloading(dict_input, week, dict_consumption_arrival, rest_needs,
                 #2 now as we are going one iteration down 
                 change_loading_unloading_status(dict_input, found_match_full[i][0],4, "processed_unloading")
                 #changing the status to full 
+             
+
                 change_loading_unloading_status(dict_input, found_match_full[i][0],0, "empty")
                 #change the value to the max
                 change_loading_unloading_status(dict_input, found_match_full[i][0],1, 0)
@@ -190,6 +215,7 @@ def processing_unloading(dict_input, week, dict_consumption_arrival, rest_needs,
         #here we do not process anything , should keep things as they are
         pass
     print("in unloading the dict input ----> ", dict_input)
+
     return total_consumption, dict_input
 
 

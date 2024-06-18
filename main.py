@@ -36,9 +36,9 @@ if __name__ == "__main__":
         for i in all_weeks:
             #if we are in the first instance
             if i == all_weeks[0]:
-                first_element_loading = processing_loading(ex, i, dict_consumption_arrival,initial_remaining ,  check = {"loading":0 , "empty":1, "unloading":2,"full":3})
+                first_element_loading =list(processing_loading(ex, i, dict_consumption_arrival,initial_remaining ,  check = {"loading":0 , "empty":1, "unloading":2,"full":3}))
                 creating_list_values(first_element_loading,"loading", i, "")#adding empty values 
-                first_element_unloading = processing_unloading(first_element_loading[1], i, dict_consumption_arrival,  initial_needs,  check = {"loading":3 , "empty":2, "unloading":0,"full":1})
+                first_element_unloading = list(processing_unloading(first_element_loading[1], i, dict_consumption_arrival,  initial_needs,  check = {"loading":3 , "empty":2, "unloading":0,"full":1}))
                 creating_list_values(first_element_unloading,"unloading", i, "")
                 #defining the new variables
                 ex = first_element_unloading[1]
@@ -47,6 +47,37 @@ if __name__ == "__main__":
                 #representing the unloading remains S
                 initial_needs =  first_element_unloading[0]
                 print( "initial remains week 1", initial_remaining, "initial needs week 1", initial_needs , "week ",  i)
+                #need to add here as well the second loading in case it is needed 
+
+
+
+                if round(first_element_loading[3] - first_element_loading[0], 1) < 213.4: 
+                    #create a ccutom function 
+                    print("not_first_elements_loading not working --> ", first_element_loading, first_element_unloading)
+                    to_load = round(213.4 - (first_element_loading[3] - first_element_loading[0]),1)#rounding here as well 
+                    #change to load if below 0 to avoid any issues
+                    if to_load<1 :#stricly less than one , other things are ok
+                        to_load = 1
+                    else:pass #else we do nothing 
+
+                    print("to load should be differentce between the 194 and what we were able to load--------------------------->  ", "ex----> " ,i,  ex, to_load, initial_needs,initial_remaining ,  first_element_loading )
+                    
+                    #should modify iteratively here 
+                    exceptions_elements_loading = list(process_second_loading(ex, to_load, initial_remaining, first_element_loading, check = {"loading":0 , "empty":1, "unloading":2,"full":3}))
+                    print("exceptions_elements_loading --> ", exceptions_elements_loading)
+                    #EX IS EQUAL to not first oading so i can just modify it 
+                    #not sending the rest needs 
+                    # exceptions_elements_loading[0]  = rest_needs
+                    creating_list_values(first_element_loading, "xxx", i,  "")
+                    ex = exceptions_elements_loading[1]
+                    initial_remaining = exceptions_elements_loading[0]
+                    print("789463514321354362103 -->"  , first_element_loading[2],exceptions_elements_loading[2], "all stop")
+                    first_element_loading[2] = exceptions_elements_loading[2]#substituting the dict 
+
+
+
+
+
             else:
                 print("initial remains going in ", initial_remaining, "initial needs going in", initial_needs , "week going in ",  i)
                 #initial remaining here should be the what was calculated in the first instance
@@ -62,13 +93,24 @@ if __name__ == "__main__":
                 initial_needs = not_first_elements_unloading[0]
                 #print the remainings after each iteration 
                 print( "initial remains", initial_remaining, "initial needs", initial_needs , "week ",  i)
-                print("what entering into teh second loading ",not_first_elements_loading,  type(not_first_elements_loading[2]) ,not_first_elements_loading[2] , not_first_elements_loading[0],  type(not_first_elements_loading[0]))
+                print("what entering into teh second loading ",not_first_elements_loading[3] - not_first_elements_loading[0], not_first_elements_loading,not_first_elements_loading[0], not_first_elements_loading[1], not_first_elements_loading[2], not_first_elements_loading[3],   type(not_first_elements_loading[2]) ,not_first_elements_loading[2] , not_first_elements_loading[0],  type(not_first_elements_loading[0]))
                 #initial values, 
-                
-                if not_first_elements_loading[3] - not_first_elements_loading[0] < 194:
+                #adding here the full laoding capacity 
+                #NEEDS TO CALCULATE HERE THE ROUD UP BECAUSE HE APPROX IS NOT WORKING 
+
+
+
+
+                #doesn t take into account if i loade less because i have nothing else ex __> loaded == 211
+                if round(not_first_elements_loading[3] - not_first_elements_loading[0], 1) < 213.4 and initial_remaining != 0 : 
                     #create a ccutom function 
                     print("not_first_elements_loading not working --> ", not_first_elements_loading)
-                    to_load = 194 - (not_first_elements_loading[3] - not_first_elements_loading[0])
+                    to_load = round(213.4 - (not_first_elements_loading[3] - not_first_elements_loading[0]),1)#rounding here as well 
+                    #change to load if below 0 to avoid any issues
+                    if to_load<1 :#stricly less than one , other things are ok
+                        to_load = 1
+                    else:pass #else we do nothing 
+
                     print("to load should be differentce between the 194 and what we were able to load--------------------------->  ", "ex----> " ,i,  ex, to_load, initial_needs,initial_remaining ,  not_first_elements_loading )
                     
                     #should modify iteratively here 

@@ -258,6 +258,39 @@ def processing_loading(dict_input, week, dict_consumption_arrival, rest_genova, 
 
 
 
+
+def second_iter(first_element_loading, first_element_unloading, creating_list_values, i):
+#def to shorten the code in main
+    if round(first_element_loading[3] - first_element_loading[0], 1) < 213.4: 
+        #create a ccutom function 
+        print("not_first_elements_loading not working --> ", first_element_loading, first_element_unloading)
+        to_load = round(213.4 - (first_element_loading[3] - first_element_loading[0]),1)#rounding here as well 
+        #change to load if below 0 to avoid any issues
+        if to_load<1 :#stricly less than one , other things are ok
+            to_load = 1
+        else:pass #else we do nothing 
+        print("to load should be differentce between the 194 and what we were able to load--------------------------->  ", "ex----> " ,i,  ex, to_load, initial_needs,initial_remaining ,  first_element_loading )
+        #should modify iteratively here 
+        exceptions_elements_loading = list(process_second_loading(ex, to_load, initial_remaining, first_element_loading, check = {"loading":0 , "empty":1, "unloading":2,"full":3}))
+        print("exceptions_elements_loading --> ", exceptions_elements_loading)
+        #EX IS EQUAL to not first oading so i can just modify it 
+        #not sending the rest needs 
+        # exceptions_elements_loading[0]  = rest_needs
+        creating_list_values(first_element_loading, "xxx", i,  "")
+        ex = exceptions_elements_loading[1]
+        initial_remaining = exceptions_elements_loading[0]
+        print("789463514321354362103 -->"  , first_element_loading[2],exceptions_elements_loading[2], "all stop")
+        first_element_loading[2] = exceptions_elements_loading[2]#substituting the dict 
+        return ex, initial_remaining
+
+
+
+
+
+
+
+
+
 #getting the values working 
 #second loading to be added into the loading function
 
@@ -271,14 +304,14 @@ def process_second_loading(dict_input,to_load,rest_genova ,not_first_elements,  
     #looking for empty
     found_match_empty = ordering_empty(find_value_for_loading(dict_input, "empty"))
     #the total load should be above anyway 
-    if len(found_match_empty) > 0:
+    if len(found_match_empty) > 0 and to_load>0:
         for i in range(len(found_match_empty)):
-            
             change_loading_unloading_status(dict_input, found_match_empty[i][0],3, "processed_loading")
             #put total arrival here so we need to allocate all
             print("entering the empty cycle !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
             change_loading_unloading_status(dict_input, found_match_empty[i][0],1,to_load)
             #keeo status to loaded 
+            print("dict input in loading second ---> ", dict_input)
             #resetting total arrival
             #erasing total arrival, rest = 0 
             change_loading_unloading_status(dict_input, found_match_empty[i][0],0, "loading")
@@ -286,9 +319,11 @@ def process_second_loading(dict_input,to_load,rest_genova ,not_first_elements,  
             change_loading_unloading_status(dict_input, found_match_empty[i][0],6, 0)
             #change the dict loaded 
             not_first_elements[2][found_match_empty[i][0]] = to_load
+            print("not first element in second loading --_>", not_first_elements)
             #is this changing or not ? hould i increment it 
             rest_genova = rest_genova - to_load
             #calculating the rest needs 
+            to_load = 0 #resetting the to load  
     else:
         
         rest_genova = rest_genova 

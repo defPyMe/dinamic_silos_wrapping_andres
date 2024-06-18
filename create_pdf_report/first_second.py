@@ -192,6 +192,7 @@ def create_second_visual():
 
     # creating the series with genova remainings , take full column and then skiop some vvalues
     all_rest = [int(i) for i in list(df_result_skimmed_4_loading["df_rest_genova"])[0:15:3]]
+    
     #occupancy column, list comprehension with a simple division creating values
     #creating sum of the capacity using the first df
     all_capacity = sum(list(df_initial["max"]))#should be one single value

@@ -51,7 +51,7 @@ def creating_list_values(input_tuple, cycle_name, week, remains):
 
     df_result = pd.DataFrame()
     #will use input tuple 1 as a flag of the lenght --> len(input_tuple[1])
-    print("input tuple in writing -----> ", input_tuple)
+    print("input tuple in writing -----> ", input_tuple, "    " , cycle_name)
     
     #input tuple = (0, {188: ['loading', 271.6, 550, 'processed_loading', 'processed_unloading', 0, 0], 190: ['empty', 0, 550, 'processed_loading', 'processed_unloading', 
     #0, 2], 191: ['loading', 35.0, 550, 'processed_loading', 'processed_unloading', 0, 0]})
@@ -71,6 +71,7 @@ def creating_list_values(input_tuple, cycle_name, week, remains):
         rest_needs = [0 for i in range(len(input_tuple[1]))]
         loaded_current = list(input_tuple[2].values()) #should be in order with the keys , i need to take the values only 
         print("loaded_current ---> ", loaded_current)
+       
         cycle = [cycle_name for i in range(len(input_tuple[1]))]
     #different cycle
     elif cycle_name=="xxx":#using loading to flag the  loaded current
@@ -79,18 +80,21 @@ def creating_list_values(input_tuple, cycle_name, week, remains):
         rest_needs = [0 for i in range(len(input_tuple[1]))]
         rest_genova = [remains for i in range(len(input_tuple[1]))]
         loaded_current = list(input_tuple[2].values()) #should be in order with the keys , i need to take the values only 
-        print("loaded_current ---> ", loaded_current)
+        print("loaded_current ---> ", loaded_current, input_tuple)
+       
         #unloading hardcoded
-        cycle = ["unloading" for i in range(len(input_tuple[1]))]
+
+        cycle = ["unloading" for i in range(len(input_tuple[1]))]#unloading before
     #unloading
     else:
+        print("entering here unoading")
         rest_needs =  [input_tuple[0] for i in range(len(input_tuple[1]))]
         rest_genova =  [0 for i in range(len(input_tuple[1]))]
         #fake loaded with all zeroes to match the loading , shouldn t be the 
-        loaded_current = [0 for i in range(len(input_tuple[1]))] #should be in order with the keys , i need to take the values only 
-        print("loaded_current ---> ", loaded_current)
+      #should be in order with the keys , i need to take the values only 
         #here we record what was loaded into each silo
         cycle = [cycle_name for i in range(len(input_tuple[1]))]
+        loaded_current =   [0 for i in range(len(input_tuple[1]))]
     
     
     
