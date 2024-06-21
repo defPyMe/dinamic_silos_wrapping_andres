@@ -205,7 +205,7 @@ def create_second_visual():
     
 
     #for now i just add a simple list with the numbers to make sure all are covered
-    occupancy_column = [i for i in all_weeks_loaded]#['{:.1%}'.format(i/all_capacity) for i in all_weeks_loaded]#4 things here 
+    occupancy_column = [int(i) for i in all_weeks_loaded]#['{:.1%}'.format(i/all_capacity) for i in all_weeks_loaded]#4 things here 
     #coverage columns that uses the same current filling 
     all_consumption = list(df_all_consumption["consumption"])
     coverage_column  = []
@@ -324,8 +324,10 @@ def create_andres_graph():
     ax.legend(prop={'size': 17})
  # Choose the week to highlight
     highlight_week = return_current_week_year()  # Example week to highlight, replace with your desired week
-    highlight_index = all_weeks_single.index(highlight_week.replace("_", " "))
-
+    if highlight_week in all_weeks_single:#if the current week is not in the analysis we skip it 
+        highlight_index = all_weeks_single.index(highlight_week.replace("_", " "))
+    else:
+        highlight_index = 0 #setting the higlight index to the first in the array considered
     # Add a vertical line at the chosen week
    # Define the limits for the vertical line
     y_min, y_max = ax.get_ylim()

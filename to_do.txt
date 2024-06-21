@@ -1,0 +1,120 @@
+next steps : 
+
+
+
+
+add the unloaded column as loaded, should be consensed all in tthe unloading part 
+
+work on the desired coverage algorithm 
+add also the alba butter and allendorf butter, should not be mixed with the other ones  
+add a cost part where we track individual isotanks and see how much is paid in every week 
+
+
+
+
+
+
+
+how do we achieve 5 weeeks coverage 
+- coverage is calculated on next weeks mainly
+- should extend the count to all the weeks and make it iterativey nuntil the desired coverage is achieved 
+- load the df in memory and then modify it iteratively and plug it in again into teh main loop
+- check again and load
+- if the coverage is not 5 weeks then we add some arrivals else we decrease
+what about the first values ?? maybe only the first one ??
+maybe i just keep the current butter at genova fixed and the change the arrirvals --> i shouldnn t go to zero in any week , minimum of 3 isotanks per week 
+
+i go to 3 weeks all, then see the coverage 
+lower, higher --> if 5 is ok, then ok else i start adding values 
+
+to see how the full thing -->
+else we start adding an isotank per week and see how it changes
+
+
+
+- to 
+- 
+- 
+- 
+- 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+week num	consumption	arrival
+25_2024	168	252.2
+26_2024	192	77.6
+27_2024	216	310.4
+28_2024	216	232.8
+29_2024	240	155.2
+30_2024	192	155.2
+31_2024	144	155.2
+32_2024	192	213.4
+33_2024	264	155.2
+34_2024	240	155.2
+35_2024	231.5	135.8
+36_2024	269	252.2
+37_2024	269	252.2
+38_2024	269	252.2
+39_2024	269	252.2
+40_2024	261	252.2
+41_2024	261	116.4
+42_2024	261	116.4
+43_2024	261	135.8
+44_2024	261	135.8
+45_2024	193	155.2
+46_2024	193	155.2
+47_2024	193	155.2
+48_2024	193	155.2
+49_2024	120	155.2
+50_2024	120	155.2
+51_2024	120	155.2
+52_2024	120	155.2
+1_2025	146	155.2
+2_2025	146	155.2
+3_2025	146	155.2
+4_2025	146	155.2
+5_2025	146	0
+6_2025	165	155.2
+7_2025	165	155.2
+8_2025	165	155.2
+9_2025	165	155.2
+10_2025	138	0
+11_2025	138	155.2
+12_2025	138	155.2
+13_2025	138	155.2
+14_2025	101	155.2
+15_2025	101	155.2
+16_2025	101	155.2
+17_2025	101	155.2
+18_2025	101	155.2
+19_2025	146	155.2
+20_2025	146	155.2
+21_2025	146	155.2
+22_2025	146	155.2
+23_2025	141	155.2
+24_2025	141	155.2
+25_2025	141	155.2
+26_2025	141	155.2
+27_2025	158	194
+28_2025	158	194
+29_2025	158	194
+30_2025	158	194
+31_2025	158	194
+32_2025	268	155.2
+33_2025	268	155.2
+34_2025	268	155.2
+35_2025	268	155.2
+

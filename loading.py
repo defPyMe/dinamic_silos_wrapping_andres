@@ -123,6 +123,10 @@ def processing_loading(dict_input, week, dict_consumption_arrival, rest_genova, 
     dict_loading = {k:v for (k,v) in list_of_values}
     total_arrival_original =  dict_consumption_arrival[week][1] + rest_genova
 
+    #initializing dit unloading, initialized as zeros
+
+    dict_unloading = {k:v for (k,v) in list_of_values}
+   
 
 
     #rest needs should be 0 at the beginning when the function is called 
@@ -254,7 +258,7 @@ def processing_loading(dict_input, week, dict_consumption_arrival, rest_genova, 
         #passed on to the next cycle
     print("week "+ week + "rest genova "+ str(rest_genova),  " the dict input we will push into the nex  itertaion is ", dict_input)
     
-    return rest_genova, dict_input, dict_loading, total_arrival_original#adding dict loading return here 
+    return rest_genova, dict_input, dict_loading, total_arrival_original, dict_unloading#adding dict loading return here 
 
 
 

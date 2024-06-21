@@ -73,6 +73,9 @@ def creating_list_values(input_tuple, cycle_name, week, remains):
         print("loaded_current ---> ", loaded_current)
        
         cycle = [cycle_name for i in range(len(input_tuple[1]))]
+
+
+        #should add the unloaded current here 
     #different cycle
     elif cycle_name=="xxx":#using loading to flag the  loaded current
         #making this dinamics
@@ -84,7 +87,7 @@ def creating_list_values(input_tuple, cycle_name, week, remains):
        
         #unloading hardcoded
 
-        cycle = ["unloading" for i in range(len(input_tuple[1]))]#unloading before
+        cycle = ["unloading" for i in range(len(input_tuple[1]))]#unloading before, loading for andres to make it work   <---------------------------------------
     #unloading
     else:
         print("entering here unoading")
