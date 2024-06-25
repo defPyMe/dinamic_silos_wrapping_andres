@@ -76,9 +76,18 @@ def create_pdf(filename):
     image_path = "Andres_graph.png"  # replace with your image path
     c.drawImage(image_path, .5 * inch, height - 8.7 * inch, width=7.2 * inch, height=2.5 * inch)
 
+
+
+
+
+    #change the style of the last title
+    c.setFont("Helvetica", 10)
+
+
+
     #last description
-    text = """Peaks in silos \"full\" status expressed in number of weeks """
-    c.drawString(0.5 * inch, height - 9 * inch, text)
+    text = """Peaks in silos \"full\" status expressed in number of weeks                       Isotanks melted in previous weeks """
+    c.drawString(0.8 * inch, height - 9 * inch, text)
     #text = """by the above graph. The idea is to highlight how close we will get to the 6 weeks limit imposed"""
     #c.drawString(0.5 * inch, height - 6.2 * inch, text)
     #text = """by quality when the butter has been melted. As it is a projection based on forecasted consumption """
@@ -89,7 +98,19 @@ def create_pdf(filename):
     #adding quality image table
     # Add an image
     image_path = "styled_quality.png"  # replace with your image path
-    c.drawImage(image_path, 1.8 * inch, height - 10.25 * inch, width=5 * inch, height=1.2 * inch)
+    c.drawImage(image_path, 1.2 * inch, height - 10.25 * inch, width=3.5 * inch, height=1.2 * inch)
+
+    image_path = "loaded.png"
+    c.drawImage(image_path, 5.2 * inch, height - 10 * inch, width=2 * inch, height=1 * inch)
+    
+
+    c.setFont("Helvetica", 6)
+    text = """* Unloading of silos has slowed down in recent weeks due to """
+    c.drawString(5.3 * inch, height - 10.05 * inch, text)
+    #capacity problems
+    text = """capacity problem"""
+    c.drawString(5.35 * inch, height - 10.15 * inch, text)
+
 
     #text = """2"""
     #c.drawString(7.8 * inch, height - 10.9 * inch, text)#going down line by line witha  change of.2
@@ -97,8 +118,9 @@ def create_pdf(filename):
     #text = """1"""
     #c.drawString(8.09 * inch, height - 10.71 * inch, text)#going down line by line witha  change of.2
     #
+    c.setFont("Helvetica", 10)
     text = """___________________________________________________________________________"""
-    c.drawString(0.79 * inch, height - 10.5 * inch, text)#going down line by line witha  change of.2
+    c.drawString(1.42 * inch, height - 10.5 * inch, text)#going down line by line witha  change of.2
     #
     # Save the PDF
     c.save()

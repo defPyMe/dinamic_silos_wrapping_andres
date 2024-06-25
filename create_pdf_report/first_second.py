@@ -6,6 +6,8 @@ import numpy as np
 import datetime
 #adding operator to add up values 
 from operator import add
+#ordered dict to get the 
+from collections import OrderedDict
 
 
 
@@ -349,4 +351,31 @@ def create_andres_graph():
 
 create_andres_graph()
 
+def creating_loaded_unloaded():
+
+    df = pd.read_excel(r"C:\Users\cavazluca1\OneDrive - Ferrero Ecosystem\Desktop\projects\andres coca butter\siloses_all\Butter_melting_schedule.xlsx")
+    #adding a  column for the weeks , with the format --> ex :22 2022 
+    #getting the last four loadings by removing the last all in the list 
+    #list(OrderedDict.fromkeys(lst))
+    #create a list values starting from current and four back 
+    weeks = [str(datetime.datetime.today().isocalendar()[1] -i)+"_"+str(datetime.datetime.now().year)  for i in range(1,5)]
+    #create pivot table 
+    df_filtered = df[df["WEEK"].isin(weeks)]
+    #should add a check to add 0 if not present in th table
+
+    data_table = pd.DataFrame(pd.pivot_table(df_filtered, index = ["WEEK"],   aggfunc="count", fill_value = 0)).reset_index()#could be a dict or a df , probably a df is better 
+    
+    #new = pd.DataFrame.from_dict(dict_new)
+    data_table_filtered = data_table[["WEEK","DATA"]]
+    data_table_filtered.rename(columns={"DATA": "Isotanks Melted"}, inplace=True)
+
+    styled_df = data_table_filtered.style.background_gradient(cmap='viridis').set_caption('Student Scores')#styling here and then writing later on
+    # Render and save the DataFrame as an image
+    ax = render_mpl_table(data_table_filtered, header_columns=0, col_width=2,row_height=.2,font_size=8)
+    plt.savefig('loaded.png', bbox_inches='tight', pad_inches=0.1)
+    
+    
+    
+creating_loaded_unloaded()
+    
 

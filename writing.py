@@ -75,7 +75,7 @@ def creating_list_values(input_tuple, cycle_name, week, remains):
         cycle = [cycle_name for i in range(len(input_tuple[1]))]
 
 
-        #should add the unloaded current here 
+        #should add the unloaded current here , skipping the loading altogether
     #different cycle
     elif cycle_name=="xxx":#using loading to flag the  loaded current
         #making this dinamics
@@ -84,7 +84,7 @@ def creating_list_values(input_tuple, cycle_name, week, remains):
         rest_genova = [remains for i in range(len(input_tuple[1]))]
         loaded_current = list(input_tuple[2].values()) #should be in order with the keys , i need to take the values only 
         print("loaded_current ---> ", loaded_current, input_tuple)
-       
+        
         #unloading hardcoded
 
         cycle = ["unloading" for i in range(len(input_tuple[1]))]#unloading before, loading for andres to make it work   <---------------------------------------

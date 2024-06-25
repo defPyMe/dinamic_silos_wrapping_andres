@@ -4,7 +4,7 @@
 from dataset import ex, dict_consumption_arrival
 #188 empty rest  - 132
 #in case we go in teh second iteration i need to sum ?? or should be a different i?
-
+#should pass unloading dict on to the second loading if present, else log it here
 
 
 def find_value_for_loading(dictionary, look_word):
